@@ -1,0 +1,9 @@
+.idea
+venv
+static
+media
+templates
+**/migrations/*
+!**/migrations/__init__.py
+**/__pycache__/
+*.py~
