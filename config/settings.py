@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'shared',
     'modeltranslation',
     'region',
+    'facilities',
 
 ]
 AUTH_USER_MODEL = 'users.Users'
