@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'modeltranslation',
     'region',
     'facilities',
+    'dacha',
 
 ]
 AUTH_USER_MODEL = 'users.Users'
