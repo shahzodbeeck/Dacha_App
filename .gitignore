@@ -7,3 +7,4 @@ templates
 !**/migrations/__init__.py
 **/__pycache__/
 *.py~
+*.md~
