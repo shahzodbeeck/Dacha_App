@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
-from .models import Dacha, DachaImage, DachaComment, DachaLike, DachaCommentLike, DachaRating
+from .models import Dacha, DachaImage, DachaComment, DachaLike, DachaCommentLike, DachaRating, ClientType
 from .serializers import DachaSerializer, DachaImageSerializer, DachaCommentSerializer, DachaLikeSerializer, \
-    DachaCommentLikeSerializer, DachaRatingSerializer
+    DachaCommentLikeSerializer, DachaRatingSerializer, ClientTypeSerializer
 
 
 class DachaViewSet(viewsets.ModelViewSet):
@@ -33,3 +33,8 @@ class DachaCommentLikeViewSet(viewsets.ModelViewSet):
 class DachaRatingViewSet(viewsets.ModelViewSet):
     queryset = DachaRating.objects.all()
     serializer_class = DachaRatingSerializer
+
+
+class ClientTypeViewSet(viewsets.ModelViewSet):
+    queryset = ClientType.objects.all()
+    serializer_class = ClientTypeSerializer
