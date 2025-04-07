@@ -29,9 +29,16 @@ class DachaSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop('uploaded_images', [])
+        facilities_data = validated_data.pop('facilities', [])
+
         dacha = Dacha.objects.create(**validated_data)
+
+        if facilities_data:
+            dacha.facilities.set(facilities_data)
+
         for image_data in uploaded_images:
             DachaImage.objects.create(dacha=dacha, image=image_data)
+
         return dacha
 
     def update(self, instance, validated_data):
