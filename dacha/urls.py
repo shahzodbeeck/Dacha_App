@@ -12,7 +12,7 @@ router.register(r'dacha_likes', DachaLikeViewSet)
 router.register(r'dacha_comment_likes', DachaCommentLikeViewSet)
 router.register(r'dacha_ratings', DachaRatingViewSet)
 router.register(r'client_types', ClientTypeViewSet)
-router.register(r'user_dachas', UserDachasViewSet)
+router.register(r'user_dachas', UserDachasViewSet,basename='user_dachas')
 
 urlpatterns = [
     path('', include(router.urls)),
