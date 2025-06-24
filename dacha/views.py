@@ -38,3 +38,11 @@ class DachaRatingViewSet(viewsets.ModelViewSet):
 class ClientTypeViewSet(viewsets.ModelViewSet):
     queryset = ClientType.objects.all()
     serializer_class = ClientTypeSerializer
+
+
+class UserDachasViewSet(viewsets.ModelViewSet):
+    queryset = Dacha.objects.all()
+    serializer_class = DachaSerializer
+
+    def get_queryset(self):
+        return Dacha.objects.filter(user=self.request.user)
