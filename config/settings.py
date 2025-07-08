@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-d49izqa*q+(zhmtzxd=*g-ctg5zx10)+uj@^sm(^dt)$4&fb7s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
     'users',
     'shared',
     'modeltranslation',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 ]
 AUTH_USER_MODEL = 'users.Users'
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -122,12 +124,21 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
@@ -154,3 +165,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True

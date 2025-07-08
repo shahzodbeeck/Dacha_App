@@ -4,6 +4,10 @@ from django.db import models
 from shared.models import BaseModel
 
 
+class ClientType(BaseModel):
+    name = models.CharField(max_length=100, blank=True)
+
+
 class Dacha(BaseModel):
     name = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=100, blank=True)
@@ -13,10 +17,39 @@ class Dacha(BaseModel):
     hall_count = models.IntegerField(blank=True, null=True)
     price = models.IntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    client_type = models.ForeignKey(ClientType, on_delete=models.CASCADE, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     user = models.ForeignKey('users.Users', on_delete=models.CASCADE, blank=True, null=True)
 
+    TRANSACTION_CHOICES = (
+        ('sale', 'Sotuv'),
+        ('rent', 'Arenda'),
+    )
+    transaction_type = models.CharField(
+        max_length=10,
+        choices=TRANSACTION_CHOICES,
+        default='rent',
+        blank=False
+    )
 
+    # Updated property type field with new options
+    PROPERTY_TYPE_CHOICES = (
+        ('dacha', 'Dacha'),  # Default: Dacha (general term)
+        ('uchastka', 'Uchastka'),  # Plot with a house
+        ('dom', 'Dom'),  # House only
+        ('yer', 'Yer'),  # Land only
+        ('sanitorieum', 'Sanatoriya'),  # Land only
+        ('hotel', 'Mehmonhona'),  # Land only
+    )
+    property_type = models.CharField(
+        max_length=20,
+        choices=PROPERTY_TYPE_CHOICES,
+        default='dacha',  # Default set to 'dacha'
+        blank=False
+    )
+
+
+# Other models remain unchanged
 class DachaImage(BaseModel):
     dacha = models.ForeignKey(Dacha, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='dacha/')
