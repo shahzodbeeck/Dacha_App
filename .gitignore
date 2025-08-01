@@ -8,3 +8,4 @@ templates
 **/__pycache__/
 *.py~
 *.md~
+db.sqlite3

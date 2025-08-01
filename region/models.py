@@ -1,6 +1,6 @@
 from django.db import models
 
-# from shared.on_migrate.region import *  #Regionlarni create qiladi
+from shared.on_migrate.region import *  #Regionlarni create qiladi
 from shared.models import BaseModel
 
 
