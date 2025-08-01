@@ -1,5 +1,5 @@
 from django.db import models
-from shared.on_migrate.facilities import *  #Qulayliklarni create qiladi
+from shared.on_migrate.facilities import *
 
 from shared.models import BaseModel
 

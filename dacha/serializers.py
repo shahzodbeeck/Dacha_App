@@ -54,6 +54,7 @@ class DachaSerializer(serializers.ModelSerializer):
         instance.client_type = validated_data.get('client_type', instance.client_type)
         instance.phone = validated_data.get('phone', instance.phone)
         instance.user = validated_data.get('user', instance.user)
+        instance.is_active = validated_data.get('is_active', instance.is_active)
         instance.transaction_type = validated_data.get('transaction_type', instance.transaction_type)
         instance.property_type = validated_data.get('property_type', instance.property_type)
         instance.save()

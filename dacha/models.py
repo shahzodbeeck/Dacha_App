@@ -32,24 +32,34 @@ class Dacha(BaseModel):
         blank=False
     )
 
-    # Updated property type field with new options
     PROPERTY_TYPE_CHOICES = (
-        ('dacha', 'Dacha'),  # Default: Dacha (general term)
-        ('uchastka', 'Uchastka'),  # Plot with a house
-        ('dom', 'Dom'),  # House only
-        ('yer', 'Yer'),  # Land only
-        ('sanitorieum', 'Sanatoriya'),  # Land only
-        ('hotel', 'Mehmonhona'),  # Land only
+        ('dacha', 'Dacha'),
+        ('uchastka', 'Uchastka'),
+        ('dom', 'Dom'),
+        ('yer', 'Yer'),
+        ('sanitorieum', 'Sanatoriya'),
+        ('hotel', 'Mehmonhona'),
     )
     property_type = models.CharField(
         max_length=20,
         choices=PROPERTY_TYPE_CHOICES,
-        default='dacha',  # Default set to 'dacha'
+        default='dacha',
         blank=False
     )
+    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
 
 
-# Other models remain unchanged
+class DachaBooking(BaseModel):
+    dacha = models.ForeignKey(Dacha, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.Users', on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    class Meta:
+        unique_together = ('dacha', 'user', 'start_date', 'end_date')
+
+
 class DachaImage(BaseModel):
     dacha = models.ForeignKey(Dacha, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='dacha/')
